@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+    nginx_ssl:
+        container_name: nginx_ssl
+        build:
+            context: ./requirements/nginx 
+            dockerfile: Dockerfile
+        ports:
+            - "443:443"
+    
+        restart: "always"
+    

@@ -1,0 +1,14 @@
+FRM	debian:buster
+
+COPY	. /
+
+RUN 	apt update -y && apt install -y nginx dumb-init
+RUN	mkdir /run/php/ && touch /run/php/php7.3-fpm.sock && chmod 666 /run/php/php7.3-fpm.sock
+
+COPY	conf/nginx.conf /etc/nginx/nginx.conf 
+
+EXPOSE	80
+
+ENTRYPOINT	["/usr/bin/dumb-init", "--"]
+
+CMD		["nginx", "-g", "daemon off;"]
