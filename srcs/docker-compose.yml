@@ -30,4 +30,14 @@ services:
         ports: 
             - "9000:9000"
         restart: "always"
+    mariadb:
+        container_name: mariadb
+        build: 
+            context: ./requirements/mariadb
+            dockerfile: Dockerfile
+        volumes:
+            - "php_test/www:rw"
+        ports: 
+            - "3306:3306"
+        restart: always
     
