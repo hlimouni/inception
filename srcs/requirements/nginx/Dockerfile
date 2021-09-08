@@ -1,4 +1,4 @@
-FROM	alpine
+        FROM	alpine
 
 RUN 	apk update && \
         apk add nginx dumb-init openssl

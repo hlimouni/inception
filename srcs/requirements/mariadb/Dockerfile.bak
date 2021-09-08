@@ -1,0 +1,11 @@
+FROM alpine
+
+RUN apk update && \
+	apk add openrc mysql mysql-client dumb-init
+
+COPY tools/my.cnf /etc/my.cnf
+
+# RUN mkdir -p /run/mysqld
+
+ENTRYPOINT	["/usr/bin/dumb-nit"]
+CMD		["./tools/start.sh"]
