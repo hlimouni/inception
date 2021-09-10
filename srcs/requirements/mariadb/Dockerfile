@@ -8,17 +8,12 @@ ARG MYSQL_DATABASE
 
 ARG MYSQL_PASSWORD
 
-# Install dependencies
-
 RUN apk update && \
     apk add --no-cache openrc dumb-init && \
     apk add mariadb mariadb-client
 
-# Upload mariadb config
-
 COPY tools/my.cnf /etc/my.cnf
 
-# Config privileges mysql> scripts
 
 RUN mkdir /etc/scripts
 
