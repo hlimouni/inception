@@ -7,14 +7,13 @@ WP_FILES_DIR=/home/${USER}/data/wordpress_files
 all: $(DATA_DIR)
 	docker-compose -f ./srcs/docker-compose.yml up -d --build
 
-$(DATA_DIR): $(WP_DB_DIR) $(WP_FILES_DIR)
-	
+$(DATA_DIR): $(WP_DB_DIR) $(WP_FILES_DIR)	
 		
 $(WP_DB_DIR):
-	@mkdir -p /home/hlimouni/data/wordpress_db
+	@mkdir -p $(WP_DB_DIR)
 
 $(WP_FILES_DIR):
-	@mkdir -p /home/hlimouni/data/wordpress_files
+	@mkdir -p $(WP_FILES_DIR)
 
 down:
 	@docker-compose  -f ./srcs/docker-compose.yml down
