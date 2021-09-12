@@ -10,7 +10,7 @@ ARG MYSQL_PASSWORD
 
 RUN apk update && \
     apk add --no-cache openrc dumb-init && \
-    apk add mariadb mariadb-client
+    apk add mariadb mariadb-client expect
 
 COPY tools/my.cnf /etc/my.cnf
 
@@ -23,10 +23,11 @@ COPY /tools/configbase.sql /etc/scripts
 
 COPY /tools/init_db.sh /
 
-RUN sh init_db.sh
+# RUN sh init_db.sh
 
 EXPOSE 3306
 
-ENTRYPOINT	["/usr/bin/dumb-init", "--"]
+ENTRYPOINT	["sh", "init_db.sh"]
+# ENTRYPOINT	["/usr/bin/dumb-init", "--"]
 
 CMD ["mysqld_safe"]
