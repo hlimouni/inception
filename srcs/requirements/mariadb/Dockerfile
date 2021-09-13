@@ -23,11 +23,11 @@ COPY /tools/configbase.sql /etc/scripts
 
 COPY /tools/init_db.sh /
 
-# RUN sh init_db.sh
+RUN sh init_db.sh
 
 EXPOSE 3306
 
-ENTRYPOINT	["sh", "init_db.sh"]
-# ENTRYPOINT	["/usr/bin/dumb-init", "--"]
+# ENTRYPOINT	["sh", "init_db.sh"]
+ENTRYPOINT	["/usr/bin/dumb-init", "--"]
 
 CMD ["mysqld_safe"]
