@@ -17,7 +17,6 @@ RUN wget https://wordpress.org/latest.tar.gz \
 	&& mkdir -p /www \
 	&& tar -xzf latest.tar.gz --strip-components=1 -C /www \
 	&& rm -rf *tar.gz 
-	#&& chown -R www:www /www/wordpress
 
 COPY tools/wp-config.php /www/wp-config.php
 

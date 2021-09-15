@@ -8,8 +8,6 @@ RUN     adduser -D -g 'www' www
 RUN     mkdir /www && \
         chown -R www:www /var/lib/nginx 
 
-# COPY ./tools/index.html /www/index.html`
-
 RUN     chown -R www:www /www
 
 RUN     mkdir -p /etc/nginx/ssl && \
