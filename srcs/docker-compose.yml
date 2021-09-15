@@ -28,7 +28,7 @@ services:
             context: ./requirements/nginx 
             dockerfile: Dockerfile
         volumes:
-            - "wordpress_files:/www:rw"
+            - "wordpress_files:/www"
         ports:
             - "443:443"
         restart: "always"
@@ -46,13 +46,20 @@ services:
 
     mariadb:
         container_name: mariadb
+        env_file:
+            - .env
         build: 
             context: ./requirements/mariadb
             dockerfile: Dockerfile
+            args:
+                - MYSQL_USER=$MYSQL_USER
+                - MYSQL_PASSWORD=$MYSQL_PASSWORD
+                - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+                - MYSQL_DATABASE=$MYSQL_DATABASE
         volumes:
-            - "wordpress_db:/var/lib/mysql:rw"
+            - "wordpress_db:/var/lib/mysql"
         ports: 
             - "3306:3306"
         restart: always
-        env_file: .env
+        
     
