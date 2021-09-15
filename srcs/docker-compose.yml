@@ -39,7 +39,7 @@ services:
             context: ./requirements/wordpress
             dockerfile: Dockerfile
         volumes:
-            - "wordpress_files:/www:rw"
+            - "wordpress_files:/www"
         ports: 
             - "9000:9000"
         restart: "always"
