@@ -1,5 +1,0 @@
-CREATE USER 'user'@'%' IDENTIFIED BY '123';
-CREATE DATABASE wordpress;
-GRANT ALL PRIVILEGES ON wordpress . * TO 'user'@'%' IDENTIFIED BY '123';
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
-FLUSH PRIVILEGES;
