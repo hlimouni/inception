@@ -35,14 +35,32 @@ services:
 
     php_wordpress:
         container_name: php_wordpress
+        env_file: .env
         build:
             context: ./requirements/wordpress
             dockerfile: Dockerfile
+            args:
+                - WP_USER=$WP_USER
+                - WP_USER_PASSWORD=$WP_USER_PASSWORD
+                - WP_ADMIN_PASSWORD=$WP_ADMIN_PASSWORD
+                - WP_ADMIN=$WP_ADMIN
+                - MYSQL_USER=$MYSQL_USER
+                - MYSQL_PASSWORD=$MYSQL_PASSWORD
+                - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+                - MYSQL_DATABASE=$MYSQL_DATABASE
         volumes:
             - "wordpress_files:/www"
         ports: 
             - "9000:9000"
+        command: >
+            /bin/sh -c '
+            wp core install --path=/www --url=hlimouni.42.fr --title="Inception" --admin_name=$WP_ADMIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=hlimouni@student.1337.ma --skip-email;
+            wp user create $WP_USER wp_user@wordpress.com --path=/www --role=subscriber --user_pass=$WP_USER_PASSWORD;
+            /usr/sbin/php-fpm7 -F
+            '
         restart: "always"
+        depends_on:
+            - "mariadb"
 
     mariadb:
         container_name: mariadb

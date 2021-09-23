@@ -11,7 +11,7 @@ RUN     mkdir /www && \
 RUN     chown -R www:www /www
 
 RUN     mkdir -p /etc/nginx/ssl && \
-        openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=MA/ST=KHOURIBGA/L=KHOURIBGA/O=1337/CN=localhost" \
+        openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=MA/ST=KHOURIBGA/L=KHOURIBGA/O=1337/CN=hlimouni.42.fr" \
         -keyout /etc/nginx/ssl/key.pem -out /etc/nginx/ssl/cert.pem 
 
 COPY	tools/nginx.conf /etc/nginx/nginx.conf 

@@ -19,9 +19,9 @@ down:
 	@env $$(cat ./srcs/.env) docker-compose  -f ./srcs/docker-compose.yml down
 
 wipe: down confirm_wipe
-	sudo rm -rf $(DATA_DIR)
-	docker volume rm $$(docker volume ls -q)
-	docker rmi -f $$(docker images -qa)
+	@-sudo rm -rf $(DATA_DIR)
+	@-docker volume rm $$(docker volume ls -q)
+	@-docker rmi -f $$(docker images -qa)
 
 confirm_wipe:
 	@echo -n "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
