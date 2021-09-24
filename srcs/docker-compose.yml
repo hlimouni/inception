@@ -1,5 +1,8 @@
 version: "3"
 
+networks:
+  inception_net:
+
 volumes:
   wordpress_db:
     driver: local
@@ -27,15 +30,19 @@ services:
         build:
             context: ./requirements/nginx 
             dockerfile: Dockerfile
+        image: nginx_ssl
         volumes:
             - "wordpress_files:/www"
         ports:
             - "443:443"
+        networks:
+            - inception_net
         restart: "always"
 
     php_wordpress:
         container_name: php_wordpress
         env_file: .env
+        image: php_wordpress
         build:
             context: ./requirements/wordpress
             dockerfile: Dockerfile
@@ -59,6 +66,8 @@ services:
             /usr/sbin/php-fpm7 -F
             '
         restart: "always"
+        networks:
+            - inception_net
         depends_on:
             - "mariadb"
 
@@ -66,6 +75,7 @@ services:
         container_name: mariadb
         env_file:
             - .env
+        image: mariadb
         build: 
             context: ./requirements/mariadb
             dockerfile: Dockerfile
@@ -78,6 +88,8 @@ services:
             - "wordpress_db:/var/lib/mysql"
         ports: 
             - "3306:3306"
+        networks:
+            - inception_net
         restart: always
         
     

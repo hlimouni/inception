@@ -5,7 +5,7 @@ WP_FILES_DIR=/home/${USER}/data/wordpress_files
 .PHONY: all down clean wipe confirm_wipe
 
 up: $(DATA_DIR)
-	@env $$(cat ./srcs/.env) docker-compose --file ./srcs/docker-compose.yml up -d --build
+	@env $$(cat ./srcs/.env) docker-compose --file ./srcs/docker-compose.yml up --detach --build
 
 $(DATA_DIR): $(WP_DB_DIR) $(WP_FILES_DIR)	
 		
